@@ -1,0 +1,38 @@
+• Skulle du lika gärna kunna använda ArrayList för att lagra elementen i FifoQueue
+i uppgift D1?
+Ja eftersom både ArrayList och LinkedList, skillnaden är hur de hanterar elemntens lagring och åtkomst. 
+
+
+• Jämför de två olika sätten att implementera FifoQueue (uppgift D1 resp. uppgift D3).
+Fördelar/nackdelar?
+FifoQueue (baserad på LinkedList):
+
+Fördelar:
+
+Enkel implementation med inbyggd LinkedList.
+Effektiv för vanliga köoperationer.
+Nackdelar:
+
+Mindre effektiv för vissa operationer.
+Använder mer minne än alternativet med egen enkellänkad lista.
+FifoQueue2 (baserad på egen enkellänkad lista):
+
+Fördelar:
+
+Mindre minnesanvändning.
+Potentiellt snabbare iteration.
+Nackdelar:
+
+Komplexare implementation med egen enkellänkad lista.
+Mindre effektiv för vissa operationer, som borttagning från början av listan.
+
+
+• Istället för att implementera en egen kö-klass skulle man helt enkelt kunna använda
+någon av kö-klasserna i java.util (LinkedList eller ArrayDeque). Ofta är det klokt
+att återanvända en befintlig implementering på detta sätt. I vilka situationer kan det
+vara olämpligt?
+Prestanda, anpassning osv.
+
+• Vid testning av dina klass FifoQueue får du grönt ljus. Kan du då vara säker på att
+din klass är felfri?
+Nej, grönt ljus vid testning innebär endast att de angivna testfallen har passerats. Det garanterar inte att din klass är helt fri från fel. Andra testfall kan avslöja bortglömda scenarier eller potentiella fel. Fullständig testning, inklusive hörnfall och gränsfall, är nödvändig för att öka förtroendet för klassens korrekthet.
