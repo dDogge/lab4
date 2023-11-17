@@ -2,8 +2,8 @@ package queue_singlelinkedlist;
 import java.util.*;
 
 public class FifoQueue2<E> extends AbstractQueue<E> implements Queue<E> {
-    private QueueNode<E> last;
-    private int size;
+    private QueueNode<E> last; // Reference to the last node in the queue
+    private int size; // Number of elements in the queue
 
     public FifoQueue2() {
         super();
@@ -19,11 +19,15 @@ public class FifoQueue2<E> extends AbstractQueue<E> implements Queue<E> {
      *           to this queue, else false
      */
     public boolean offer(E e) {
+        // Create a new node for the specified element
         QueueNode<E> newNode = new QueueNode<>(e);
+        
+        // If the queue is empty, set the last node to the new node with circular reference
         if (last == null) {
             last = newNode;
             last.next = last; // circular reference for a single element
         } else {
+            // Connect the new node to the front of the queue and update last
             newNode.next = last.next;
             last.next = newNode;
             last = newNode;
@@ -78,31 +82,49 @@ public class FifoQueue2<E> extends AbstractQueue<E> implements Queue<E> {
      * @return an iterator over the elements in this queue
      */    
     public Iterator<E> iterator() {
+        // Create a new Iterator instance using an anonymous inner class
         return new Iterator<E>() {
+            // Initialize the iterator with the first node in the queue (or null if the queue is empty)
             private QueueNode<E> current = (last == null) ? null : last.next;
+            
+            // Track the remaining elements to iterate over
             private int remaining = size;
 
+            /**
+             * Checks if there are more elements to iterate over
+             * @return true if there are remaining elements, false otherwise
+             */
             @Override
             public boolean hasNext() {
                 return remaining > 0;
             }
 
+            /**
+             * Retrieves the next element in the iteration
+             * @return the next element
+             * @throws NoSuchElementException if there are no more elements to iterate over
+             */
             @Override
             public E next() {
+                // Check if there are remaining elements
                 if (!hasNext()) {
                     throw new NoSuchElementException();
                 }
+
+                // Retrieve the current element, move to the next node, and decrement the remaining count
                 E element = current.element;
                 current = current.next;
                 remaining--;
+
+                // Return the retrieved element
                 return element;
             }
         };
     }
 
     private static class QueueNode<E> {
-        E element;
-        QueueNode<E> next;
+        E element; // The data of the node
+        QueueNode<E> next; // Reference to the next node in the queue
 
         private QueueNode(E x) {
             element = x;
@@ -146,7 +168,4 @@ public class FifoQueue2<E> extends AbstractQueue<E> implements Queue<E> {
         q.last = null;
         q.size = 0;
     }
-    
 }
-
-
